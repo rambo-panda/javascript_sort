@@ -33,4 +33,5 @@
  * 动画演示
      * [日本工程师](http://jsdo.it/norahiko/oxIy/fullscreen)
      * [基数排序](http://www.cs.usfca.edu/~galles/visualization/RadixSort.html)
+     * [中文演示](http://www.webhek.com/misc/comparison-sort)
 
