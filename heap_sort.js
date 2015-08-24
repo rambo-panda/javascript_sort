@@ -1,18 +1,14 @@
 "use strict";
 
+var sort_tool = require('./sort_tool');
+
 // 满二叉树(堆)排序实现
 function Heap(array, max_count){
 
 	this.heap = array;
 	this.max_count = max_count;
 
-	var swap = function(array, desc_index, source_index){
-			var desc_value = array[desc_index];
-
-			array[desc_index] = array[source_index];
-			array[source_index] = desc_value;
-
-		},
+	var swap = sort_tool.swap,
 		min_heapify = function (array, cur_index, head_size){
 			var top_node_index,
 				left_subtree,
@@ -100,13 +96,10 @@ var result = [ 1, 2, 5, 7, 12, 17, 19, 22, 25, 28, 36, 46, 92, 99 ];
 var heap = new Heap(test_arr),
 	built_heap = heap.heap;
 
-console.log(built_heap);
-
 console.assert(built_heap.join(',') === result.join(',') , 'not equal');
 
 heap.set([21, 600, 200]);
 
-console.log(heap.heap);
 result = [ 1, 2, 5, 7, 12, 17, 19, 21, 22, 25, 28, 36, 46, 92, 99, 200, 600 ];
 
 console.assert(heap.heap.join(',') === result.join(',') , 'not equal');

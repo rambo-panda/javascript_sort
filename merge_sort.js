@@ -1,5 +1,7 @@
 "use strict";
 
+var sort_tool = require('./sort_tool');
+
 var merge = function(left, right) {
 		var final_arr = [];
 
@@ -9,33 +11,8 @@ var merge = function(left, right) {
 
 		return final_arr.concat(left.concat(right));
 	},
-	slice = function(array, begin, end){
-
-		(begin < 0) && (begin = array.length + begin);
-
-		(end === undefined) && (end = array.length);
-
-		var new_array = [],
-			index = 0;
-
-		--begin;
-
-		for(; index < array.length;  index++){
-			if(
-				index > begin
-				&&
-				index < end
-			){
-				new_array[new_array.length] = array[index];
-			}
-		}
-
-		return new_array;
-
-	},
-	parse_int = function(number){
-		return Number(String(number).replace(/\.(\d+)/g, ''));
-	};
+	slice = sort_tool.slice,
+	parse_int = sort_tool.parse_int;
 
 var merge_sort = function(array) {
 

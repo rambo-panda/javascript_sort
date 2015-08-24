@@ -1,71 +1,29 @@
 "use strict";
 
-var convert_argument_to_array = function(args){
-		return Array.prototype.slice.call(args);
-	},
-	is_array = function(obj){
-		return Object.prototype.toString.call(obj) === '[object Array]';
-	},
-	floor = function(number){
-		var right_num = String(number).match( /-?(\d+)\./);
+var sort_tool = require('./sort_tool');
 
-		if(right_num === null){
-			return NaN;
-		}
+var quick_sort = function(array) {
 
-		right_num = parseInt(right_num, 10);
-
-		return number < 0 ?  -right_num - 1 : right_num;
-	};
-
-var concat_arr = function(){
-
-	var need_concat = convert_argument_to_array(arguments),
-		need_concat_length = need_concat.length,
-		array_form_arguments,
-		need_concat_index = 0;
-
-	var new_array = [];
-
-	while(need_concat_index < need_concat_length){
-
-		array_form_arguments = need_concat[need_concat_index++];
-
-		for(var index = 0; index< array_form_arguments.length; index++){
-
-			var temp_array = array_form_arguments[index];
-
-			new_array[new_array.length] = is_array(temp_array) ? concat_arr(new_array, temp_array) : temp_array;
-		}
-
+	if (array.length <= 1) {
+		return array;
 	}
 
-	return new_array;
-
-};
-
-var quick_sort = function(arr) {
-
-	if (arr.length <= 1) {
-		return arr;
-	}
-
-	var pivotIndex = floor(arr.length / 2),
-		pivot = arr.splice(pivotIndex, 1)[0],
+	var pivot_index = sort_tool.floor(array.length / 2),
+		pivot = sort_tool.splice(array, pivot_index, 1)[0],
 		left = [],
 		right = [],
 		temp_value,
 		index = 0;
 
-	for (; index < arr.length; index++){
+	for (; index < array.length; index++){
 
-		temp_value = arr[index];
+		temp_value = array[index];
 
 		(temp_value < pivot ? left : right).push(temp_value);
 
 	}
 
-	return concat_arr(
+	return sort_tool.concat_arr(
 		quick_sort(left),
 		[pivot],
 		quick_sort(right)
